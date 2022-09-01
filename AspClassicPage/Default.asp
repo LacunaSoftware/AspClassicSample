@@ -37,6 +37,7 @@
     crossorigin="anonymous"></script>
 
   <script>
+    var url = "https://localhost:7282/";
     var pki = new LacunaWebPKI();
 
     function start() {
@@ -77,7 +78,7 @@
     function beginAuthenticationProcess() {
       log("Begin authentication process by calling API");
       return new Promise(function (resolve) {
-        $.getJSON("https://localhost:7160", function (response) {
+        $.getJSON(url, function (response) {
           var state = {};
           state.nonce = response.nonce;
           state.digestAlgorithm = response.digestAlgorithm;
@@ -125,7 +126,7 @@
       $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "https://localhost:7160",
+        url: url,
         data: JSON.stringify(content),
       }).then(function (response) {
         log("Authentication finished with success. Use the following values to authenticate in your sistem");
