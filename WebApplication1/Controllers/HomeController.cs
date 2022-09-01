@@ -25,11 +25,6 @@ namespace WebApplication1.Controllers {
 				DigestAlgorithm = PKCertificateAuthentication.DigestAlgorithm.Oid
 			};
 
-			//var vr = TempData["ValidationResults"] as ValidationResults;
-			//if (vr != null && !vr.IsValid) {
-			//	ModelState.AddModelError("", vr.ToString());
-			//}
-
 			return Json(model);
 		}
 
@@ -42,8 +37,10 @@ namespace WebApplication1.Controllers {
 			var vr = certAuth.Complete(model.Nonce, model.Certificate, model.Signature, Util.GetTrustArbitrator(), out certificate);
 
 			if (!vr.IsValid) {
-				var model = new ValidationResultsModel(vr);
-				return UnprocessableEntity(model);
+				return UnprocessableEntity(new ValidationErrorModel()
+                {
+					ValidationText = vr.ToString()
+                });
 			}
 
 			var userCert = PKCertificate.Decode(model.Certificate);
@@ -51,11 +48,6 @@ namespace WebApplication1.Controllers {
 				SubjectName = userCert.SubjectName.CommonName,
 				Cpf = userCert.PkiBrazil.CpfFormatted,
 			});
-		}
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error() {
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }
