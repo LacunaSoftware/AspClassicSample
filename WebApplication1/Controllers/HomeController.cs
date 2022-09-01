@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
     {
 
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult Index()
         {
 
             var nonceStore = Util.GetNonceStore();
@@ -37,20 +37,19 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(AuthenticationModel model)
+        public ActionResult Index([FromBody] AuthenticationModel model)
         {
 
             var nonceStore = Util.GetNonceStore();
+
             var certAuth = new PKCertificateAuthentication(nonceStore);
             PKCertificate certificate;
-            var vr = certAuth.Complete(model.Nonce, model.Certificate, model.Signature, Util.GetTrustArbitrator(), out certificate);
-           
-            if (!vr.IsValid)
+            var vr =  certAuth.Complete(model.Nonce, model.Certificate, model.Signature, Util.GetTrustArbitrator(), out certificate);
+
+            return Json(new AuthenticationInfoModel()
             {
-                TempData["ValidationResults"] = vr;
-                return Json("alguma coisa");
-            }
-            return Json("alguma coisa");
+                UserCert = PKCertificate.Decode(model.Certificate)
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
