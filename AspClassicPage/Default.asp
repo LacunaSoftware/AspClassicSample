@@ -129,7 +129,7 @@
         url: url,
         data: JSON.stringify(content),
       }).then(function (response) {
-        log("Authentication finished with success. Use the following values to authenticate in your sistem");
+        log("Authentication finished with success. Use the following values to authenticate in your system");
         log(response.subjectName);
         log(response.cpf);
       }).fail(function (error) {
