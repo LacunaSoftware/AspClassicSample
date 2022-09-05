@@ -5,36 +5,39 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 </header>
-<
 <body>
   <div class="container">
     <h1 class="pt-md-5">Authentication sample with ASP classic</h1>
-    <form>
+    <form action="Default.asp" method="get">
       <div class="row pt-md-2">
         <div class="col">
           <div class="input-group mb-3">
             <select class="form-select" id="certificateSelect"></select>
             <button id="refreshBtn" class="btn btn-outline-secondary" type="button">Refresh</button>
-          </div>
-          <button class="btn btn-primary" id="authenticationBtn" type="button">
-            Authenticate
-          </button>
+          <input class="btn btn-primary" id="authenticationBtn" type="submit"></input>
         </div>
         <div class="pt-md-4"></div>
         <div class="form-floating">
           <textarea class="w-100 form-control bg-light" style="font-family: monospace; height: 500px;" id="logPanel"
-            readonly></textarea>
+          readonly></textarea>
         </div>
       </div>
     </form>
   </div>
-
+  <%
+   bodyBase64Wsq = ""
+   url = "https://localhost:7282/"
+   Set HttpReq = Server.CreateObject("MSXML2.ServerXMLHTTP")
+   HttpReq.open "GET", url, false
+   HttpReq.send()
+  %>
+  <script runat="server" language="JScript" src="json2.js"></script>
   <script type="text/javascript" src="https://cdn.lacunasoftware.com/libs/web-pki/lacuna-web-pki-2.15.2.min.js"
-    integrity="sha256-1YBmFfdb8pfq/5ibjis2jYVr7IaEmPokuTH7Ejbx9OE=" crossorigin="anonymous"></script>
+  integrity="sha256-1YBmFfdb8pfq/5ibjis2jYVr7IaEmPokuTH7Ejbx9OE=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
+  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+  crossorigin="anonymous"></script>
 
   <script>
     var url = "https://localhost:7282/";
