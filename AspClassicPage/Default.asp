@@ -5,7 +5,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 </header>
-
+<
 <body>
   <div class="container">
     <h1 class="pt-md-5">Authentication sample with ASP classic</h1>
@@ -83,6 +83,8 @@
           state.nonce = response.nonce;
           state.digestAlgorithm = response.digestAlgorithm;
           resolve(state);
+        }).fail(function (error){
+          log("No response from the server")
         });
       });
     }
