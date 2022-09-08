@@ -1,4 +1,3 @@
-<script runat="server" language="JScript" src="json2.js"></script>
 <%
 
 Dim data, httpRequest, postResponse
@@ -34,15 +33,19 @@ Set responseJson = JSON.parse(httpRequest.responseText)
   <meta charset="UTF-8">
   <title>ASP classic sample</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 </header>
 <div class="container text-center col-md-4">
-<h3 class="pt-md-5">Authentication Information</h3>
-    <div class="card text-center">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><% Response.Write responseJson.subjectName %></li>
-          <li class="list-group-item"><% Response.Write responseJson.cpf %></li>
-        </ul>
-      </div>
+  <h3 class="pt-md-5">Authentication Information</h3>
+  <div class="card text-center mb-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><% Response.Write responseJson.subjectName %></li>
+      <li class="list-group-item"><% Response.Write responseJson.cpf %></li>
+      <li class="list-group-item"><% if responseJson.cnpj <> "" then Response.Write responseJson.cnpj %></li>
+    </ul>
+  </div>
+  <a class="btn btn-primary text-center" href="Default.asp">Run Again</a>
 </div>
+
+<script runat="server" language="JScript" src="json2.js"></script>
 
