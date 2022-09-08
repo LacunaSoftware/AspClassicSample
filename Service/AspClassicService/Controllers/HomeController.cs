@@ -5,8 +5,8 @@ using AspClassicService.Models;
 using AspClassicService.Services;
 namespace AspClassicService.Controllers
 {
-    public class HomeController : Controller
-    {
+	public class HomeController : Controller
+	{
 		private readonly IWebHostEnvironment _hostingEnvironment;
 
 		public HomeController(IWebHostEnvironment _hostingEnvironment)
@@ -54,6 +54,7 @@ namespace AspClassicService.Controllers
 			{
 				SubjectName = userCert.SubjectName.CommonName,
 				Cpf = userCert.PkiBrazil.CpfFormatted,
+				Cnpj = userCert.PkiBrazil.CnpjFormatted,
 			});
 		}
 	}

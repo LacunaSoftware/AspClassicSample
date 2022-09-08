@@ -1,8 +1,11 @@
 ﻿using Lacuna.Pki;
 
-namespace AspClassicService.Models {
-	public class AuthenticationInfoModel {
+namespace AspClassicService.Models
+{
+	public class AuthenticationInfoModel
+	{
 		public string SubjectName { get; set; }
 		public string Cpf { get; set; }
+		public string? Cnpj { get; set; }
 	}
 }
