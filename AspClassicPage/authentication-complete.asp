@@ -39,13 +39,14 @@ Set responseJson = JSON.parse(httpRequest.responseText)
   <h3 class="pt-md-5">Authentication Information</h3>
   <div class="card text-center mb-3">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><% Response.Write responseJson.subjectName %></li>
-      <li class="list-group-item"><% Response.Write responseJson.cpf %></li>
-      <li class="list-group-item"><% if responseJson.cnpj <> "" then Response.Write responseJson.cnpj %></li>
+      <li class="list-group-item"><% Response.Write "Nome: " & responseJson.subjectName %></li>
+      <li class="list-group-item"><% Response.Write "CPF: " & responseJson.cpf %></li>
+    <% if responseJson.cnpj <> "" then %>
+    <li class="list-group-item"><% Response.Write "CNPJ: " & responseJson.cnpj %></li>
+    <% end if %>
     </ul>
   </div>
   <a class="btn btn-primary text-center" href="Default.asp">Run Again</a>
 </div>
 
 <script runat="server" language="JScript" src="json2.js"></script>
-
