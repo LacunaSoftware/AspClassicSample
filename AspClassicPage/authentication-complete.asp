@@ -24,27 +24,46 @@ httpRequest.Open "POST", "https://localhost:7282/", False
 httpRequest.SetRequestHeader "Content-Type", "application/json"
 httpRequest.Send req
 
+status = httpRequest.Status
+
+
+
+
 Set responseJson = JSON.parse(httpRequest.responseText)
 
 
 %>
 <!DOCTYPE html>
 <header>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>ASP classic sample</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+    crossorigin="anonymous"
+  />
 </header>
 <div class="container text-center col-md-4">
   <h3 class="pt-md-5">Authentication Information</h3>
   <div class="card text-center mb-3">
+    <%if status = 200 then %>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><% Response.Write "Nome: " & responseJson.subjectName %></li>
-      <li class="list-group-item"><% Response.Write "CPF: " & responseJson.cpf %></li>
-    <% if responseJson.cnpj <> "" then %>
-    <li class="list-group-item"><% Response.Write "CNPJ: " & responseJson.cnpj %></li>
-    <% end if %>
+      <li class="list-group-item">
+        <% Response.Write "Nome: " & responseJson.subjectName %>
+      </li>
+      <li class="list-group-item">
+        <% Response.Write "CPF: " & responseJson.cpf %>
+      </li>
+      <% if responseJson.cnpj <> "" then %>
+      <li class="list-group-item">
+        <% Response.Write "CNPJ: " & responseJson.cnpj %>
+      </li>
+      <% end if %>
     </ul>
+    <% ElseIf status = 422 then %>
+    <li class="list-group-item"><% Response.Write "Certificado Inválido" %></li>
+    <% end if %>
   </div>
   <a class="btn btn-primary text-center" href="Default.asp">Run Again</a>
 </div>
