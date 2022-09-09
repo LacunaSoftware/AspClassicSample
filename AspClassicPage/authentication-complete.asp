@@ -62,7 +62,7 @@ Set responseJson = JSON.parse(httpRequest.responseText)
       <% end if %>
     </ul>
     <% ElseIf status = 422 then %>
-    <li class="list-group-item"><% Response.Write "Certificado Inválido" %></li>
+    <li class="list-group-item"><% Response.Write responseJson.validationText  %></li>
     <% end if %>
   </div>
   <a class="btn btn-primary text-center" href="Default.asp">Run Again</a>
