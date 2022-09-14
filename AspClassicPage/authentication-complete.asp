@@ -20,7 +20,7 @@ req = req & "}"
 
 
 Set httpRequest = Server.CreateObject("MSXML2.ServerXMLHTTP")
-httpRequest.Open "POST", "https://localhost:7282/", False
+httpRequest.Open "POST", "http://localhost:7282/", False
 httpRequest.SetRequestHeader "Content-Type", "application/json"
 httpRequest.Send req
 

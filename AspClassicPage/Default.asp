@@ -1,7 +1,7 @@
 <%
 
 Set httpRequest = Server.CreateObject("MSXML2.ServerXMLHTTP")
-httpRequest.Open "GET", "https://localhost:7282/", False
+httpRequest.Open "GET", "http://localhost:7282/", False
 httpRequest.SetRequestHeader "Content-Type", "application/json"
 httpRequest.Send()
 
@@ -41,8 +41,6 @@ postResponse = httpRequest.ResponseText
       </div>
     </form>
   </div>
-
-  <script runat="server" language="JScript" src="json2.js"></script>
   <script type="text/javascript" src="https://cdn.lacunasoftware.com/libs/web-pki/lacuna-web-pki-2.15.2.min.js"
   integrity="sha256-1YBmFfdb8pfq/5ibjis2jYVr7IaEmPokuTH7Ejbx9OE=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
